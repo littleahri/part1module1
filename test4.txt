@@ -1,0 +1,67 @@
+
+
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+
+public class test1 {
+    private int[] array = null;
+      //数组有效长度
+               public int length = 0;
+
+               //空参构造函数，默认数组大小为10
+               public test1() {
+                 this.array = new int[10];
+             }
+
+              public test1(int size) {
+                 this.array = new int[size];
+             }
+
+             //给自定义数组添加元素
+              public void insert(int number) {
+                 //判断数组是否满
+                 //满了，扩容,扩容需要新建一个数组，将旧的数据复制过去，再插入
+                 //没满，直接插入
+                 //插入之后length+1
+                 if (array.length%10<8) {
+                         expand(this.array);
+                         array[length] = number;
+                     } else {
+                         this.array[length] = number;
+                     }
+               length++;
+
+            }
+
+    //每次扩容后比之前大一倍
+    public void expand(int[] arr) {
+                int expandSize = arr.length * 2;
+                this.array = new int[expandSize];
+
+                 for (int i = 0; i < arr.length; i++) {
+                         this.array[i] = arr[i];
+                    }
+             }
+
+    public void travel() {
+                 System.out.print("[");
+                 for (int i = 0; i < length; i++) {
+                         System.out.print(array[i]);
+                        if (i < length - 1)
+                                 System.out.print(",");
+                     }
+                 System.out.println("]");
+             }
+    public static void main(String[] args) {
+        test1 array=new test1();
+                array.insert(10);
+                 array.insert(9);
+                 array.insert(8);
+                 array.insert(4);
+                 array.insert(5);
+                 array.insert(6);
+
+        array.travel();
+
+    }
+}
